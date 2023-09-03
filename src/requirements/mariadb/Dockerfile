@@ -2,10 +2,10 @@ FROM debian:bookworm
 
 
 #REMOVE LATER
-ENV MYSQL_DATABASE=DB
-ENV MYSQL_ROOT_PASSWORD=Vty_QB80+yvm
-ENV MYSQL_USER=inception
-ENV MYSQL_PASSWORD=ku9>qu>0sVnM
+# ENV MYSQL_DATABASE=DB
+# ENV MYSQL_ROOT_PASSWORD=Vty_QB80+yvm
+# ENV MYSQL_USER=inception
+# ENV MYSQL_PASSWORD=ku9>qu>0sVnM
 #REMOVE LATER
 
 
@@ -28,6 +28,6 @@ RUN git clone https://github.com/jrayoub/nvim_config ~/.config/nvim
 
 COPY ./conf/50-server.cnf  /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY ./tools/init.sh  /bin/init.sh
-RUN chmod 755 /bin/init.sh
+RUN chmod +x /bin/init.sh
 # ENTRYPOINT [ "zsh" ]
-CMD [ "/bin/init.sh" ]
+ENTRYPOINT [ "sh", "/bin/init.sh" ]
