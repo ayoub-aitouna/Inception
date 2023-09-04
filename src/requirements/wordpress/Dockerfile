@@ -7,6 +7,7 @@ RUN apt-get install -y php-fpm
 RUN apt-get install -y mariadb-client
 RUN apt-get install -y curl
 
+COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/
 
 # my zsh & nvim conf 
 
@@ -18,13 +19,11 @@ RUN apt-get install zsh  -y &&\
 # end of my zsh & nvim conf 
 
 RUN mkdir -p /var/www
-RUN curl -O  --output-dir /var/www https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz
+RUN curl -O  --output-dir /var/www https://wordpress.org/wordpress-6.3.1.tar.gz
 
-RUN cd /var/www && tar -xzf wordpress-6.0-fr_FR.tar.gz
-RUN cd /var/www && rm wordpress-6.0-fr_FR.tar.gz
+RUN cd /var/www && tar -xzf wordpress-6.3.1.tar.gz
+RUN cd /var/www && rm wordpress-6.3.1.tar.gz
 RUN	chown -R root:root /var/www/wordpress
 
-ENTRYPOINT [ "zsh" ]
 
-# RUN mkdir -p /var/www
-# RUN curl https://wordpress.org/latest.tar.gz | www-data tar zx -C /srv/www
+ENTRYPOINT [ "zsh" ]
