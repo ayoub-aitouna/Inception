@@ -9,7 +9,7 @@ services:
       - "3000:443"
     volumes:
       - WordPress:/var/www/html
-    links:
+    depends_on:
       - "wordpress"
   
   wordpress:
@@ -22,8 +22,8 @@ services:
       - 3306
     volumes:
       - "WordPress:/var/www/html"
-    links:
-      - "mariadb"
+    depends_on:
+      - mariadb
 
   mariadb:
     build:

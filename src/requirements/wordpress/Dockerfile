@@ -25,5 +25,4 @@ RUN cd /var/www && tar -xzf wordpress-6.3.1.tar.gz
 RUN cd /var/www && rm wordpress-6.3.1.tar.gz
 RUN	chown -R root:root /var/www/wordpress
 
-
-ENTRYPOINT [ "zsh" ]
+CMD [ "tail", "-f", "/dev/null"]
