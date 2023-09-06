@@ -17,6 +17,8 @@ services:
       context: ./requirements/wordpress/.
     networks:
       - mynetwork
+    ports:
+      - "3000:9000"
     expose:
       - 9000
       - 3306
@@ -24,6 +26,11 @@ services:
       - "WordPress:/var/www/html"
     depends_on:
       - mariadb
+    environment:
+      - MYSQL_DATABASE=DB
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
   mariadb:
     build:
@@ -39,7 +46,6 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-
 
 volumes:
   WordPress:

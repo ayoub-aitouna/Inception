@@ -19,10 +19,17 @@ RUN apt-get install zsh  -y &&\
 # end of my zsh & nvim conf 
 
 RUN mkdir -p /var/www
-RUN curl -O  --output-dir /var/www https://wordpress.org/wordpress-6.3.1.tar.gz
 
-RUN cd /var/www && tar -xzf wordpress-6.3.1.tar.gz
-RUN cd /var/www && rm wordpress-6.3.1.tar.gz
+WORKDIR /var/www
+
+RUN curl -O https://wordpress.org/wordpress-6.3.1.tar.gz
+
+RUN tar -xzf wordpress-6.3.1.tar.gz
+
+RUN rm wordpress-6.3.1.tar.gz
+
 RUN	chown -R root:root /var/www/wordpress
 
-CMD [ "tail", "-f", "/dev/null"]
+RUN mv wordpress/wp-config-sample.php wordpress/wp-config.php
+COPY ./conf/init.sh ./init.sh
+CMD [ "sh",  "init.sh"]
