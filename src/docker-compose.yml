@@ -6,7 +6,7 @@ services:
     networks:
       - mynetwork
     ports:
-      - "3000:443"
+      - "5000:443"
     volumes:
       - WordPress:/var/www/html
     depends_on:

@@ -1,15 +1,5 @@
 FROM debian:bookworm
 
-
-#REMOVE LATER
-# ENV MYSQL_DATABASE=DB
-# ENV MYSQL_ROOT_PASSWORD=Vty_QB80+yvm
-# ENV MYSQL_USER=inception
-# ENV MYSQL_PASSWORD=ku9>qu>0sVnM
-#REMOVE LATER
-
-
-
 RUN apt update -y && apt upgrade -y
 RUN apt install -y mariadb-server -y
 
