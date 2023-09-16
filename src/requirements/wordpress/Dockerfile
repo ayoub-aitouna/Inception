@@ -1,7 +1,9 @@
 FROM debian:bookworm
 
-RUN apt-get update  
+RUN apt-get update
+
 RUN apt-get install -y php7.3
+
 RUN apt-get install -y php \
 	php-cgi \
 	php-mysql \
@@ -13,6 +15,7 @@ RUN apt-get install -y php \
 	php-redis 
 
 RUN apt-get install -y mariadb-client
+
 RUN apt-get install -y curl
 
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/

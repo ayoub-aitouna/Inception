@@ -21,7 +21,6 @@ services:
       - "3000:9000"
     expose:
       - 9000
-      - 3306
     volumes:
       - "WordPress:/var/www/html"
     depends_on:
@@ -49,7 +48,18 @@ services:
 
 volumes:
   WordPress:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: 'bind'
+      device: '/Users/aaitouna/data/wordpress'
   DB:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: 'bind'
+      device: '/Users/aaitouna/data/mariadb'
 
 networks:
   mynetwork:
+    driver: bridge
