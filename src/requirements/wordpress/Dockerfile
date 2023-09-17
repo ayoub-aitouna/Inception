@@ -41,7 +41,7 @@ RUN mv wordpress/* html/
 
 RUN rm -rf wordpress
 
-RUN	chown -R root:root /var/www/html
+# RUN	chown -R root:root /var/www/html
 
 RUN mv html/wp-config-sample.php html/wp-config.php
 

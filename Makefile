@@ -2,11 +2,12 @@
 all: up
 
 up:
-	@mkdir -p /Users/aaitouna/data/{wordpress, mariadb}
-	docker-compose --env-file ./src/.env -f ./src/docker-compose.yml up -d 
+	@mkdir -p /Users/aaitouna/data/wordpress
+	@mkdir -p /Users/aaitouna/data/mariadb
+	docker-compose --env-file ./src/.env -f ./src/docker-compose.yml up -d --build
 
 down:
 	docker-compose -f ./src/docker-compose.yml down
 
 atach:
-	docker exec -it src-nginx-1 zsh
+	docker exec -it nginx zsh
