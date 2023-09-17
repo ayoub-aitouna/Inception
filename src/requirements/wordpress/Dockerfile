@@ -21,15 +21,15 @@ RUN apt-get install -y curl
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/
 
 # my zsh & nvim conf 
-RUN apt-get install zsh  -y &&\
-    apt-get install git -y &&\
-    apt-get install neovim -y &&\
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# RUN apt-get install zsh  -y &&\
+#     apt-get install git -y &&\
+#     apt-get install neovim -y &&\
+#     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # end of my zsh & nvim conf 
 
-RUN mkdir -p /var/www
+RUN mkdir -p /var/www/
 
-WORKDIR /var/www
+WORKDIR /var/www/
 
 RUN curl -O https://wordpress.org/wordpress-6.3.1.tar.gz
 
@@ -41,14 +41,21 @@ RUN mv wordpress/* html/
 
 RUN rm -rf wordpress
 
-# RUN	chown -R root:root /var/www/html
+
 
 RUN mv html/wp-config-sample.php html/wp-config.php
 
-COPY ./conf/init.sh ./init.sh
+COPY ./tools/config.sh ./config.sh
 
-RUN chmod +x init.sh
+RUN chmod +x config.sh
 
-ENTRYPOINT [ "/var/www/init.sh" ]
+
+# WP CLI
+WORKDIR /var/www/html
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+
+ENTRYPOINT [ "/var/www/config.sh" ]
 
 CMD [ "php-fpm8.2",  "-F"]

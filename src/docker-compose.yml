@@ -7,7 +7,7 @@ services:
     networks:
       - mynetwork
     ports:
-      - "5000:443"
+      - "443:443"
     volumes:
       - WordPress:/var/www/html
     depends_on:
@@ -25,11 +25,8 @@ services:
       - "WordPress:/var/www/html"
     depends_on:
       - mariadb
-    environment:
-      - MYSQL_DATABASE=DB
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    env_file:
+      - .env
 
   mariadb:
     container_name: mariadb
@@ -41,11 +38,8 @@ services:
       - 3306
     volumes:
       - "DB:/var/lib/mysql"
-    environment:
-      - MYSQL_DATABASE=DB
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    env_file:
+      - .env
 
 volumes:
   WordPress:
