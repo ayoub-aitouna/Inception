@@ -9,13 +9,13 @@ sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', 'mariadb:3306');/
 wp core install --allow-root \
     --url=localhost \
     --title="My New Site" \
-    --admin_user=$MY_WP_ADMIN \
-    --admin_password=$MY_WP_PASSOWRD \
+    --admin_user=$WP_ADMIN \
+    --admin_password=$WP_ADMIN_PASSOWRD \
     --admin_email="aaitouna@student.1337.ma"
 
 wp user create --allow_root \
-    $MY_WP_USER \
+    $WP_USER \
     "aaitouna@student.1337.ma" \
-    --user_pass=$MY_WP_PASSOWRD
+    --user_pass=$WP_USER_PASSOWRD
 
 exec $@
