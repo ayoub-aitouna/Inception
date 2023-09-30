@@ -41,14 +41,11 @@ RUN mv wordpress/* html/
 
 RUN rm -rf wordpress
 
-
-
 RUN mv html/wp-config-sample.php html/wp-config.php
 
 COPY ./tools/config.sh ./config.sh
 
 RUN chmod +x config.sh
-
 
 # WP CLI
 WORKDIR /var/www/html

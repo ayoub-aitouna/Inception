@@ -6,6 +6,10 @@ sed -i "s/define( 'DB_USER', 'username_here' );/define( 'DB_USER', '$MYSQL_USER'
 sed -i "s/define( 'DB_PASSWORD', 'password_here' );/define( 'DB_PASSWORD', '$MYSQL_PASSWORD');/" /var/www/html/wp-config.php;
 sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', 'mariadb:3306');/" /var/www/html/wp-config.php;
 
+echo "define('WP_CACHE', true);" >> /var/www/html/wp-config.php
+echo "define('WP_REDIS_HOST', 'redis');" >> /var/www/html/wp-config.php
+echo "define('WP_REDIS_PORT', '6379');" >> /var/www/html/wp-config.php
+
 wp core install --allow-root \
     --url=localhost \
     --title="My New Site" \

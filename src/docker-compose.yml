@@ -2,7 +2,7 @@ version: "3"
 services:
   nginx:
     container_name: nginx
-    build: 
+    build:
       context: ./requirements/nginx/.
     networks:
       - mynetwork
@@ -12,7 +12,7 @@ services:
       - WordPress:/var/www/html
     depends_on:
       - "wordpress"
-  
+
   wordpress:
     container_name: wordpress
     build:
@@ -38,6 +38,49 @@ services:
       - 3306
     volumes:
       - "DB:/var/lib/mysql"
+    env_file:
+      - .env
+
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis/.
+    networks:
+      - mynetwork
+    expose:
+      - 6379
+    env_file:
+      - .env
+  ftp:
+    container_name: ftp
+    build:
+      context: ./requirements/bonus/ftp/.
+    networks:
+      - mynetwork
+    ports:
+      - "21:21"
+    volumes:
+      - "WordPress:/home/ftpuser"
+    env_file:
+      - .env
+  adminer:
+    container_name: adminer
+    build:
+      context: ./requirements/bonus/adminer/.
+    networks:
+      - mynetwork
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+  static_website:
+    container_name: static_website
+    build:
+      context: ./requirements/bonus/static_website/.
+    networks:
+      - mynetwork
+    ports:
+      - "8000:8000"
     env_file:
       - .env
 
