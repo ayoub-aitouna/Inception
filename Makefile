@@ -4,7 +4,7 @@ all: up
 up:
 	@mkdir -p /Users/aaitouna/data/wordpress
 	@mkdir -p /Users/aaitouna/data/mariadb
-	docker-compose -f ./src/docker-compose.yml up  --build
+	docker-compose -f ./src/docker-compose.yml up -d --build
 
 down:
 	docker-compose -f ./src/docker-compose.yml down

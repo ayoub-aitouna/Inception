@@ -83,6 +83,16 @@ services:
       - "8000:8000"
     env_file:
       - .env
+  nodejs:
+    container_name: nodejs
+    build:
+      context: ./requirements/bonus/nodejs/.
+    networks:
+      - mynetwork
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
 
 volumes:
   WordPress:
