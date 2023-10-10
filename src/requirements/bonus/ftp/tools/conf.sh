@@ -1,7 +1,7 @@
-adduser ftpuser <<eof
-123456
-123456
-ftpuser
+adduser $FTP_USER <<eof
+$FTP_PASS
+$FTP_PASS
+$FTP_USER
 
 
 
@@ -9,6 +9,6 @@ ftpuser
 y
 eof
 
-echo 'ftpuser' >> /etc/vsftpd.userlist ;
+echo $FTP_USER >> /etc/vsftpd.userlist;
 
-exec $@
+$@

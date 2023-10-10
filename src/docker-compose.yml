@@ -59,8 +59,6 @@ services:
       - mynetwork
     ports:
       - "21:21"
-    expose:
-      - 21
     volumes:
       - "WordPress:/home/ftpuser"
     env_file:
