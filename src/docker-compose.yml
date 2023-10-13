@@ -83,6 +83,7 @@ services:
       - "8000:8000"
     env_file:
       - .env
+
   nodejs:
     container_name: nodejs
     build:

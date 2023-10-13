@@ -1,8 +1,6 @@
-FROM debian:bookworm
+FROM debian:bullseye
 
 RUN apt-get update
-
-RUN apt-get install -y php7.3
 
 RUN apt-get install -y php \
 	php-cgi \
@@ -18,11 +16,13 @@ RUN apt-get install -y mariadb-client
 
 RUN apt-get install -y curl
 
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/
+RUN mkdir -p /run/php/
 
-RUN mkdir -p /var/www/
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
 
-WORKDIR /var/www/
+RUN mkdir -p /var/www/html
+
+WORKDIR /var/www/html
 
 RUN curl -O https://wordpress.org/wordpress-6.3.1.tar.gz
 
@@ -30,22 +30,24 @@ RUN tar -xzf wordpress-6.3.1.tar.gz
 
 RUN rm wordpress-6.3.1.tar.gz
 
-RUN mv wordpress/* html/
+RUN mv wordpress/* .
 
 RUN rm -rf wordpress
 
-RUN mv html/wp-config-sample.php html/wp-config.php
+RUN mv wp-config-sample.php wp-config.php
 
-COPY ./tools/config.sh ./config.sh
+COPY ./tools/config.sh /var/www/config.sh
 
-RUN chmod +x config.sh
+RUN chmod +x /var/www/config.sh
 
 # WP CLI
-WORKDIR /var/www/html
+
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
 RUN chmod +x wp-cli.phar
+
 RUN mv wp-cli.phar /usr/local/bin/wp
 
 ENTRYPOINT [ "/var/www/config.sh" ]
 
-CMD [ "php-fpm8.2",  "-F"]
+CMD [ "php-fpm7.4",  "-F"]

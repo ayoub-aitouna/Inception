@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:bullseye
 
 
 RUN apt-get update -y && apt-get -y install curl php php-fpm php-mysql php-cli nginx

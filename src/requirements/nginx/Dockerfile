@@ -1,12 +1,12 @@
-FROM debian:bookworm
+FROM debian:bullseye
 
 EXPOSE 3000
 
-RUN apt update
+RUN apt-get -y update
 
-RUN apt install nginx -y &&\
-    apt install openssl -y &&\
-    apt install curl  -y 
+RUN apt-get install nginx -y &&\
+    apt-get install openssl -y &&\
+    apt-get install curl  -y 
 
 # Generate a Self-Signed Certificate:
 RUN openssl req -x509 -newkey rsa:4096 -keyout /etc/ssl/private/inception.key -out /etc/ssl/certs/inception.crt -days 365 -nodes \
